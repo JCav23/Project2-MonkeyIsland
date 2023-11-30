@@ -13,7 +13,23 @@ def typewriter(string):
     for i in string:
         sys.stdout.write(i)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
+
+
+def validate_input(actual, accepted_one, accepted_two, decision):
+    """
+    Validates user input using accepted criteria
+    """
+    cont = True
+    choice = actual
+    print(choice)
+    while cont:
+        if choice == accepted_one or choice == accepted_two:
+            cont = False
+        else:
+            print(f"Invalid input: Input must be {accepted_one} or {accepted_two}")
+            choice = input(f"{decision}")
+    return choice
 
 
 def start_game():
@@ -28,7 +44,8 @@ def start_game():
     typewriter('You have procured your own pirate ship and assembled a crew\n')
     typewriter('You must now pursue LeChuck back to his hideout on Monkey Island\n')
     user_state = input("Are you ready to begin the adventure: Y/N \n").lower()
-    return user_state
+    valid = validate_input(user_state, 'y', 'n', "Are you ready to begin the adventure: Y/N \n")
+    return valid
 
 
 def game_over():
@@ -39,16 +56,17 @@ def game_over():
     typewriter('Well I guess Elaine can fend for herself and LeChuck wins\n')
     typewriter('Some pirate you turned out to be...\n')
     user_state = input("Would you like to try again: Y/N \n").lower()
+    valid = validate_input(user_state, 'y', 'n', "Would you like to try again: Y/N \n")
+    return valid
 
 
 def main():
-    user_state = start_game()
-    if user_state == 'y':
+    valid = start_game()
+    if valid == 'y':
         print('next choice')
-    elif user_state == 'n':
+    elif valid == 'n':
         game_over()
     else:
-        print("You must enter a valid 'y' or 'n' ")
-
+        print("Error")
 
 main()
