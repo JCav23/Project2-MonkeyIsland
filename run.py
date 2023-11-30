@@ -60,13 +60,27 @@ def game_over():
     return valid
 
 
+def goodbye():
+    """
+    displays Goodbye screen if the player chooses not to try again following Game Over
+    """
+    print(f"{Fore.CYAN}{exit_message}")
+    typewriter('Thank you for playing, I hope you enjoyed the adventure\n')
+    typewriter('Come back and try again soon\n')
+
+
 def main():
     valid = start_game()
     if valid == 'y':
         print('next choice')
     elif valid == 'n':
-        game_over()
+        valid = game_over()
+        if valid == 'y':
+            valid = start_game()
+        elif valid == 'n':
+            goodbye()
     else:
-        print("Error")
+        print("Unforeseen Error: Please Restart")
+
 
 main()
