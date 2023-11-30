@@ -26,12 +26,29 @@ def start_game():
     typewriter('You are about to take on the role of Guybrush Threepwood\n')
     typewriter('The villainous ghost pirate LeChuck has kidnapped Governor Elaine Marley\n')
     typewriter('You have procured your own pirate ship and assembled a crew\n')
-    typewriter('You must now as pursue LeChuck back to his hideout on Monkey Island\n')
+    typewriter('You must now pursue LeChuck back to his hideout on Monkey Island\n')
     user_state = input("Are you ready to begin the adventure: Y/N \n").lower()
     return user_state
 
 
+def game_over():
+    """
+    Displays Game Over screen and gives choice to restart
+    """
+    print(f"{Fore.RED}{gameover}")
+    typewriter('Well I guess Elaine can fend for herself and LeChuck wins\n')
+    typewriter('Some pirate you turned out to be...\n')
+    user_state = input("Would you like to try again: Y/N \n").lower()
 
-start_game()
+
+def main():
+    user_state = start_game()
+    if user_state == 'y':
+        print('next choice')
+    elif user_state == 'n':
+        game_over()
+    else:
+        print("You must enter a valid 'y' or 'n' ")
 
 
+main()
