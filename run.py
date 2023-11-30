@@ -69,6 +69,21 @@ def goodbye():
     typewriter('Come back and try again soon\n')
 
 
+def ship_deck():
+    """
+    First game choice; sets the scene for the player and gives options about how to proceed
+    """
+    print(f"{Fore.YELLOW}{pirate_ship}")
+    typewriter('You have set sail with your crew and are stood aboard the deck of your ship The Sea Monkey\n')
+    typewriter('Your crew have decided this is more of a leisurely cruise rather than a rescue mission\n')
+    typewriter('You will need to brew the magic potion enabling travel to Monkey Island yourself\n')
+    typewriter('Explore the ship and find a "Jolly Roger Flag", "Cinnamon Stick", "Gunpowder", "Fine Wine" and "Ink"\n')
+    typewriter('Items will be added to your inventory automatically as you find them\n')
+    typewriter('Use the "Required" command at any input to see what\'s left to find\n')
+    typewriter('')
+
+
+
 def main():
     valid = start_game()
     if valid == 'y':
