@@ -8,6 +8,9 @@ import sys
 import time
 colorama.init(autoreset=True)
 
+inventory = []
+required = ['Jolly Roger Flag', 'Cinnamon Stick', 'Gunpowder', 'Fine Wine', 'Ink']
+
 
 def typewriter(string):
     for i in string:
@@ -22,10 +25,17 @@ def validate_input(actual, accepted, decision):
     """
     cont = True
     choice = actual
-    print(choice)
     while cont:
         if choice in accepted:
             cont = False
+        elif choice == 'inventory':
+            if inventory:
+                typewriter("You check your pockets and find...\n")
+                print(f"{Fore.GREEN}{required}")
+                choice = input(f"{decision}")
+            else:
+                typewriter("Your pockets are empty...")
+                choice = input(f"{decision}")
         else:
             print(f"Invalid input: Input must be one of the following inputs: {accepted}")
             choice = input(f"{decision}")
@@ -77,18 +87,19 @@ def ship_deck():
     typewriter('You have set sail with your crew and are stood aboard the deck of your ship The Sea Monkey\n')
     typewriter('Your crew have decided this is more of a leisurely cruise rather than a rescue mission\n')
     typewriter('You will need to brew the magic potion enabling travel to Monkey Island yourself\n')
-    typewriter('Explore the ship and find a "Jolly Roger Flag", "Cinnamon Stick", "Gunpowder", "Fine Wine" and "Ink"\n')
+    typewriter('Explore the ship and find:\n')
+    print(f"{Fore.GREEN}{required}")
     typewriter('Items will be added to your inventory automatically as you find them\n')
-    typewriter('Use the "Required" command at any input to see what\'s left to find\n')
-    typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin')
-    typewriter('Or stairs leading below deck, the choice is yours')
+    typewriter('Use the "INVENTORY" command at any input to see what you have found so far\n')
+    typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin\n')
+    typewriter('Or stairs leading below deck, the choice is yours...\n')
     user_state = input("Where would you like to go? : LADDER/DOOR/STAIRS\n").lower()
 
 
 def main():
     valid = start_game()
     if valid == 'y':
-        print('next choice')
+        valid = ship_deck()
     elif valid == 'n':
         valid = game_over()
         if valid == 'y':
