@@ -34,7 +34,7 @@ def validate_input(actual, accepted, decision):
                 print(f"{Fore.GREEN}{required}")
                 choice = input(f"{decision}")
             else:
-                typewriter("Your pockets are empty...")
+                typewriter("Your pockets are empty...\n")
                 choice = input(f"{decision}")
         else:
             print(f"Invalid input: Input must be one of the following inputs: {accepted}")
@@ -79,7 +79,7 @@ def goodbye():
     typewriter('Come back and try again soon\n')
 
 
-def ship_deck():
+def start_adventure():
     """
     First game choice; sets the scene for the player and gives options about how to proceed
     """
@@ -94,12 +94,36 @@ def ship_deck():
     typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin\n')
     typewriter('Or stairs leading below deck, the choice is yours...\n')
     user_state = input("Where would you like to go? : LADDER/DOOR/STAIRS\n").lower()
+    valid = validate_input(user_state, ['ladder', 'door', 'stairs'],
+                           "Where would you like to go? : LADDER/DOOR/STAIRS\n")
+    return valid
+
+
+def crows_nest():
+    """
+    Game event to give the player the Jolly Roger Flag
+    """
+    print(f"{Fore.YELLOW}{pirate_flag}")
+    typewriter('You climb the ladder up to the crows nest\n')
+    typewriter('This is a lot higher than you thought it would be, maybe don\'t look down...')
+    typewriter('After nearly losing your footing twice and what feels like an eternity of climbing...\n')
+    typewriter('You finally reach the top and see the ship\'s Jolly Roger Flag flapping in the breeze\n')
+    typewriter('You take down the flag and fold it up and take it with you as you climb back down\n')
+    inventory.append(required[0])
+
+    return valid
 
 
 def main():
     valid = start_game()
     if valid == 'y':
-        valid = ship_deck()
+        valid = start_adventure()
+        if valid == 'ladder':
+            valid = crows_nest()
+        elif valid == 'stairs':
+            pass
+        elif valid == 'door':
+            pass
     elif valid == 'n':
         valid = game_over()
         if valid == 'y':
