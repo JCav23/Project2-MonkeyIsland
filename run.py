@@ -16,7 +16,7 @@ def typewriter(string):
         time.sleep(0.01)
 
 
-def validate_input(actual, accepted_one, accepted_two, decision):
+def validate_input(actual, accepted, decision):
     """
     Validates user input using accepted criteria
     """
@@ -24,10 +24,10 @@ def validate_input(actual, accepted_one, accepted_two, decision):
     choice = actual
     print(choice)
     while cont:
-        if choice == accepted_one or choice == accepted_two:
+        if choice in accepted:
             cont = False
         else:
-            print(f"Invalid input: Input must be {accepted_one} or {accepted_two}")
+            print(f"Invalid input: Input must be one of the following inputs: {accepted}")
             choice = input(f"{decision}")
     return choice
 
@@ -44,7 +44,7 @@ def start_game():
     typewriter('You have procured your own pirate ship and assembled a crew\n')
     typewriter('You must now pursue LeChuck back to his hideout on Monkey Island\n')
     user_state = input("Are you ready to begin the adventure: Y/N \n").lower()
-    valid = validate_input(user_state, 'y', 'n', "Are you ready to begin the adventure: Y/N \n")
+    valid = validate_input(user_state, ['y', 'n'], "Are you ready to begin the adventure: Y/N \n")
     return valid
 
 
@@ -56,7 +56,7 @@ def game_over():
     typewriter('Well I guess Elaine can fend for herself and LeChuck wins\n')
     typewriter('Some pirate you turned out to be...\n')
     user_state = input("Would you like to try again: Y/N \n").lower()
-    valid = validate_input(user_state, 'y', 'n', "Would you like to try again: Y/N \n")
+    valid = validate_input(user_state, ['y', 'n'], "Would you like to try again: Y/N \n")
     return valid
 
 
@@ -80,8 +80,9 @@ def ship_deck():
     typewriter('Explore the ship and find a "Jolly Roger Flag", "Cinnamon Stick", "Gunpowder", "Fine Wine" and "Ink"\n')
     typewriter('Items will be added to your inventory automatically as you find them\n')
     typewriter('Use the "Required" command at any input to see what\'s left to find\n')
-    typewriter('')
-
+    typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin')
+    typewriter('Or stairs leading below deck, the choice is yours')
+    user_state = input("Where would you like to go? : LADDER/DOOR/STAIRS\n").lower()
 
 
 def main():
