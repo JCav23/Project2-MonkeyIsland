@@ -98,6 +98,14 @@ def start_adventure():
                            "Where would you like to go? : LADDER/DOOR/STAIRS\n")
     return valid
 
+def ship_deck():
+    print(f"{Fore.YELLOW}{pirate_ship}")
+    typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin\n')
+    typewriter('Or stairs leading below deck, the choice is yours...\n')
+    user_state = input("Where would you like to go? : LADDER/DOOR/STAIRS\n").lower()
+    valid = validate_input(user_state, ['ladder', 'door', 'stairs'],
+                           "Where would you like to go? : LADDER/DOOR/STAIRS\n")
+    return valid
 
 def crows_nest():
     """
@@ -110,7 +118,7 @@ def crows_nest():
     typewriter('You finally reach the top and see the ship\'s Jolly Roger Flag flapping in the breeze\n')
     typewriter('You take down the flag and fold it up and take it with you as you climb back down\n')
     inventory.append(required[0])
-
+    valid = ship_deck()
     return valid
 
 
