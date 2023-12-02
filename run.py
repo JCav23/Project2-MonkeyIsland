@@ -43,6 +43,7 @@ def validate_input(actual, accepted, decision):
             typewriter('You wrack your brain to remember the ingredients required to brew the magic potion\n')
             typewriter('You remember that you need to find...')
             print(f"{Fore.GREEN}{required}")
+            choice = input(f"{decision}")
         else:
             print(f"Invalid input: Input must be one of the following inputs: {accepted}")
             choice = input(f"{decision}")
@@ -156,7 +157,7 @@ def captains_cabin():
     typewriter('Well fit for a captain...\n')
     typewriter('Well fit enough for you anyway...\n')
     typewriter('You see a rusty old rapier mounted on the wall above the bed, a dusty old desk next to the window\n')
-    typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges')
+    typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
     user_state = input('What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n').lower()
     valid = validate_input(user_state, ['sword', 'desk', 'wardrobe', 'leave cabin'],
                            'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n')
@@ -296,8 +297,8 @@ def powder_barrels():
     if 'Rusty Rapier' in inventory:
         print(f"{Fore.YELLOW}{barrel}")
         typewriter('You draw the Rusty Rapier and used it to cut away the cargo net\n')
-        typewriter('You can now get into the barrel\'s')
-        typewriter('You remove the lid and peer inside a barrel,\n')
+        typewriter('You can now get into the barrel\'s\n')
+        typewriter('You remove the lid from one of the barrels and peer inside,\n')
         typewriter('Sure enough it is filled to the brim with powder\n')
         typewriter('You take a handful and put it in your pocket\n')
         item = required[2]
@@ -447,6 +448,22 @@ def replay_chef():
         valid = galley()
     return valid
 
+def endgame():
+
+def brew_potion():
+    """
+    Game Event; if players interact with cauldron in the galley with all required items will trigger winning endgame
+    """
+    print(f"{Fore.GREEN}{cauldron}")
+    typewriter('After a painstaking search finding all of the items you needed\n')
+    typewriter('You throw each of the items into the large pot bubbling on the stove\n')
+    typewriter('After the last item lands with a splash in the pot, smoke begins to billow out\n')
+    print(f"{Fore.GREEN}{explosion}")
+    typewriter('With a almighty BANG there is an explosion and you are knocked unconscious\n')
+    typewriter('When you awaken you realise you have arrived at Monkey Island\n')
+    valid = endgame()
+    
+
 
 def main():
     """
@@ -536,7 +553,12 @@ def main():
                         valid = chef()
 
             elif valid == 'barrels':
-                valid = powder_barrels()
+                if 'Gunpowder' in inventory:
+                    typewriter('You already have a pocket full of gunpowder which is pretty dangerous as is\n')
+                    typewriter('You won\'t need anymore\n')
+                    valid = below_deck()
+                else:
+                    valid = powder_barrels()
 
             elif valid == 'cannon':
                 exploration = False
