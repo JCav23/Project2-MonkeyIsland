@@ -201,7 +201,39 @@ def descend_below_deck():
     return valid
 
 
+def below_deck():
+    """
+    Exploration Event; the player is below deck coming from the galley
+    """
+    print(f"{Fore.YELLOW}{cannon}")
+    typewriter('You are stood below deck, you see the door to the galley, the cannon\'s lining both walls,\n')
+    typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
+    typewriter('And the stairs leading back up above deck\n')
+    user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
+    valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
+                           'What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n')
+    return valid
+
+
+def below_deck_with_gunpowder():
+    """
+       Exploration Event; the player is below deck after having collected gunpowder
+       """
+    print(f"{Fore.YELLOW}{cannon}")
+    typewriter('You are stood below deck, you see the door to the galley, the cannon\'s lining both walls,\n')
+    typewriter('Some barrels marked "GUNPOWDER" with the cargo net that secured them laying in tatters on floor,\n')
+    typewriter('And the stairs leading back up above deck\n')
+    user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
+    valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
+                           'What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n')
+    return valid
+
+
 def cannon_event():
+    """
+    Game Event; triggers a game over for the player if they make the wrong choice
+    """
+    print(f"{Fore.RED}{explosion}")
     typewriter('You suddenly have a great idea, it may be the greatest idea you have ever had\n')
     typewriter('You are not quite sure what you hope to accomplish but this good of an idea should not be ignored\n')
     typewriter('You prime the cannon, light it and climb inside the barrel\n')
