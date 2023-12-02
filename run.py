@@ -362,12 +362,46 @@ def check_pantry():
 
 
 def hangman():
+    """
+    Game Event; Triggers a game of hangman for the player
+    """
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-                "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+                "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     word_list = ['pirate', 'cannon', 'monkey', 'captain', 'swashbuckler']
-    word = word_list[randint(0, 4)]
+    random = randint(0, 4)
+    word = word_list[random]
     print(word)
-    return word
+    length = len(word)
+    game_board = []
+    lives = 5
+    game_active = True
+    valid = 0
+    for char in range(length):
+        game_board += '_'
+    while game_active:
+        choice = input('Guess a letter: \n').lower()
+        if choice not in alphabet:
+            print(f'{Fore.RED}Invalid: Choice must be letter')
+        elif choice in game_board:
+            print(f'{Fore.RED}You\'ve already chosen {choice}, pick again')
+        elif choice not in word:
+            print(f'{Fore.RED}Incorrect, lose a life')
+            lives -= 1
+            print(f'{Fore.RED}{lives}')
+            if lives == 0:
+                print(f'{Fore.RED}GAME OVER')
+                valid = 'lose'
+                game_active = False
+        for index in range(length):
+            letter = word[index]
+            if letter == choice:
+                game_board[index] = letter
+        print(f"{Fore.BLUE}{' '.join(game_board)}")
+        if "_" not in game_board:
+            print(f'{Fore.GREEN}YOU WIN')
+            game_active = False
+            valid = 'win'
+    return valid
 
 
 def chef():
