@@ -10,6 +10,7 @@ colorama.init(autoreset=True)
 
 inventory = []
 galley_visited = []
+chef_visited = []
 required = ['Jolly Roger Flag', 'Cinnamon Stick', 'Gunpowder', 'Fine Wine', 'Ink']
 
 
@@ -358,6 +359,30 @@ def check_pantry():
     valid = galley()
     return valid
 
+
+def chef():
+    """
+        Game Event; introduces the player to Chef character, plays game to win item
+        """
+    print(f"{Fore.YELLOW}{chef}")
+    typewriter('The chef regards you with disdain "I\'ve found the key to the captain\'s cabin"\n')
+    typewriter('"You should be more careful not to lose things, if you want it back you\'ll have to win it"\n')
+    typewriter('He pull\'s out an old chalkboard and prepares a game of hangman for you\n')
+    typewriter('Looks like you\'ll have to play his game if you want to get into the captain\'s cabin\n')
+    valid = hangman()
+    if valid = 'win':
+        typewriter('The chef looks dejected... "Best two out of three?"\n')
+        typewriter('You begin shouting a stream of profanities at the chef\n')
+        typewriter('It is a long list of words that should never be uttered in civil society\n')
+        typewriter('The chef finally relents, and hands over the key "Okay, no need to shout, I was just having fun\n')
+        item = 'Cabin Key'
+        inventory.append(item)
+        valid = galley()
+    else:
+        typewriter('The chef roars with laughter at your failure\n')
+        typewriter('"You\'ll have to do better than that, come back if you ever want to try again"\n')
+        valid = galley()
+    return valid
 
 def main():
     """
