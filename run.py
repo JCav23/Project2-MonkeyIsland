@@ -85,6 +85,8 @@ def goodbye():
     print(f"{Fore.CYAN}{exit_message}")
     typewriter('Thank you for playing, I hope you enjoyed the adventure\n')
     typewriter('Come back and try again soon\n')
+    valid = 'goodbye'
+    return valid
 
 
 def start_adventure():
@@ -98,7 +100,7 @@ def start_adventure():
     typewriter('Explore the ship and find:\n')
     print(f"{Fore.GREEN}{required}")
     typewriter('Items will be added to your inventory automatically as you find them\n')
-    typewriter('Use the "INVENTORY" or "REQUIRED" commands at any input to see what you have found/still need to find\n')
+    typewriter('Use the "INVENTORY" or "REQUIRED" commands at any input to see what you have found/need to find\n')
     typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin\n')
     typewriter('Or stairs leading below deck, the choice is yours...\n')
     user_state = input("Where would you like to go? : LADDER/DOOR/STAIRS\n").lower()
@@ -448,7 +450,17 @@ def replay_chef():
         valid = galley()
     return valid
 
+
 def endgame():
+    """
+    Final screen of the game display Win message
+    """
+    print(f"{Fore.GREEN}{winner}")
+    typewriter('You have done it, you have reached Monkey Island\n')
+    typewriter('You are able to defeat the Ghastly Ghost Pirate LeChuck and rescue Elaine\n')
+    valid = goodbye()
+    return valid
+
 
 def brew_potion():
     """
@@ -462,7 +474,22 @@ def brew_potion():
     typewriter('With a almighty BANG there is an explosion and you are knocked unconscious\n')
     typewriter('When you awaken you realise you have arrived at Monkey Island\n')
     valid = endgame()
-    
+    return valid
+
+
+def validate_items():
+    all_required = False
+    correct_items = 0
+    for item in required:
+        if item in inventory:
+            correct_items += 1
+        else:
+            all_required = False
+    if correct_items == 5:
+        return True
+    else:
+        typewriter(f'You only have {correct_items} of the required items')
+        return False
 
 
 def main():
@@ -567,6 +594,15 @@ def main():
                     main()
                 elif valid == 'n':
                     goodbye()
+
+            elif valid == 'cauldron':
+                valid = validate_items()
+                if valid:
+                    exploration = False
+                    valid = brew_potion()
+                else:
+                    valid = galley()
+
     elif valid == 'n':
         valid = game_over()
         if valid == 'y':
@@ -578,3 +614,6 @@ def main():
 
 
 main()
+
+
+
