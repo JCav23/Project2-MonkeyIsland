@@ -201,6 +201,18 @@ def descend_below_deck():
     return valid
 
 
+def cannon_event():
+    typewriter('You suddenly have a great idea, it may be the greatest idea you have ever had\n')
+    typewriter('You are not quite sure what you hope to accomplish but this good of an idea should not be ignored\n')
+    typewriter('You prime the cannon, light it and climb inside the barrel\n')
+    typewriter('With a deafening "BOOM" the cannon fires you through the side of the ship\n')
+    typewriter('As you sail through the air suddenly you think this may not have been the best idea\n')
+    typewriter('With a splash you land in open water, with no ship in sight and sharks beginning to circle\n')
+    typewriter('That definitely wasn\'t a good idea you think to yourself as a shark pulls you beneath the water\n')
+    valid = 'n'
+    return valid
+
+
 def main():
     valid = start_game()
     if valid == 'y':
@@ -215,12 +227,15 @@ def main():
                 else:
                     valid = crows_nest()
             elif valid == 'stairs':
-                pass
+                valid = descend_below_deck()
             elif valid == 'door':
                 if 'Cabin Key' in inventory:
                     valid = captains_cabin()
                 else:
                     valid = cabin_door()
+            elif valid == 'cannon':
+                exploration = False
+                valid = cannon_event()
     elif valid == 'n':
         valid = game_over()
         if valid == 'y':
