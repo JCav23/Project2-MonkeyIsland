@@ -6,6 +6,7 @@ from colorama import Fore
 from art import *
 import sys
 import time
+from random import randint
 colorama.init(autoreset=True)
 
 inventory = []
@@ -360,6 +361,15 @@ def check_pantry():
     return valid
 
 
+def hangman():
+    alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+                "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+    word_list = ['pirate', 'cannon', 'monkey', 'captain', 'swashbuckler']
+    word = word_list[randint(0, 4)]
+    print(word)
+    return word
+
+
 def chef():
     """
     Game Event; introduces the player to Chef character, plays game to win item
@@ -512,5 +522,5 @@ def main():
         print("Unforeseen Error: Please Restart")
 
 
-main()
-
+# main()
+hangman()

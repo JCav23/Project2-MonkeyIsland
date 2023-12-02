@@ -1,5 +1,3 @@
-word_list = ['pirate', 'cannon', 'monkey', 'captain', 'swashbuckler']
-
 opening_logo = ("""
                     _                 _____     _                 _ 
   /\/\   ___  _ __ | | _____ _   _    \_   \___| | __ _ _ __   __| |
