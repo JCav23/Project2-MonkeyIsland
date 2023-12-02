@@ -193,7 +193,10 @@ def descend_below_deck():
     print(f"{Fore.YELLOW}{cannon}")
     typewriter('You descend the stairs taking you below deck, a battery of cannons line both walls\n')
     typewriter('You cast your eyes around, you notice a door to the galley,\n')
-    typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
+    if 'Gunpowder' in inventory:
+        typewriter('Some barrels marked "GUNPOWDER" with the cargo net that secured them laying in tatters on floor,\n')
+    else:
+        typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
     typewriter('And the stairs leading back up above deck\n')
     user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
     valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
@@ -207,21 +210,10 @@ def below_deck():
     """
     print(f"{Fore.YELLOW}{cannon}")
     typewriter('You are stood below deck, you see the door to the galley, the cannon\'s lining both walls,\n')
-    typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
-    typewriter('And the stairs leading back up above deck\n')
-    user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
-    valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
-                           'What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n')
-    return valid
-
-
-def below_deck_with_gunpowder():
-    """
-       Exploration Event; the player is below deck after having collected gunpowder
-       """
-    print(f"{Fore.YELLOW}{cannon}")
-    typewriter('You are stood below deck, you see the door to the galley, the cannon\'s lining both walls,\n')
-    typewriter('Some barrels marked "GUNPOWDER" with the cargo net that secured them laying in tatters on floor,\n')
+    if 'Gunpowder' in inventory:
+        typewriter('Some barrels marked "GUNPOWDER" with the cargo net that secured them laying in tatters on floor,\n')
+    else:
+        typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
     typewriter('And the stairs leading back up above deck\n')
     user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
     valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
@@ -243,6 +235,7 @@ def cannon_event():
     typewriter('That definitely wasn\'t a good idea you think to yourself as a shark pulls you beneath the water\n')
     valid = game_over()
     return valid
+
 
 
 def main():
