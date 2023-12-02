@@ -1,4 +1,4 @@
-![MonkeyIslandLogo](assets/images/Monkey_Island_Logo.png)
+![MonkeyIslandLogo](assets/images/monkey_island_logo.png)
 
 Welcome to this project which is a text based choose your own adventure game.\n
 Inspired by the Monkey Island Series of point and click adventure games developed by Lucasfilm Games.\n

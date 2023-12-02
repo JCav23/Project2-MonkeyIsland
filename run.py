@@ -147,7 +147,7 @@ def cabin_door():
 
 def captains_cabin():
     """
-    Exploration event; player has the choice to explore the room looking for items
+    Exploration event; triggers on first visit, player has the choice to explore the room looking for items
     """
     print(f"{Fore.YELLOW}{sword}")
     typewriter('You stroll through the door and into a cabin fit for a king...\n')
@@ -161,7 +161,7 @@ def captains_cabin():
     return valid
 
 
-def cabin():
+def no_sword_cabin():
     """
     Exploration event; triggers if the player is in the cabin but already has the sword in inventory
     """
@@ -172,6 +172,18 @@ def cabin():
                            'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n')
     return valid
 
+
+def cabin():
+    """
+    Exploration event; triggers if the player is in the cabin without the sword
+    """
+    typewriter('You look around the captain\'s cabin, You see a rusty old rapier mounted on the wall above the bed\n')
+    typewriter('You also see a dusty old desk next to the window\n')
+    typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
+    user_state = input('What would you like to do? : DESK/WARDROBE/LEAVE CABIN\n').lower()
+    valid = validate_input(user_state, ['desk', 'wardrobe', 'leave cabin'],
+                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n')
+    return valid
 
 
 def take_sword():
@@ -184,7 +196,7 @@ def take_sword():
     typewriter('You take the sword down off the wall and take it with you\n')
     item = 'Rusty Rapier'
     inventory.append(item)
-    valid = cabin()
+    valid = no_sword_cabin()
     return valid
 
 
@@ -198,7 +210,29 @@ def check_desk():
     typewriter('You remove the quill and leave it on the desk, and put the inkwell in your pocket\n')
     item = required[4]
     inventory.append(item)
-    valid = cabin()
+    if 'Rusty Rapier' in inventory:
+        valid = no_sword_cabin()
+    else:
+        valid = cabin()
+    return valid
+
+
+def check_wardrobe():
+    """
+    Game Event; gives the player the required Fine Wine item
+    """
+    print(f"{Fore.YELLOW}{wine}")
+    typewriter('You approach the wardrobe and carefully try to open the door without damaging it\n')
+    typewriter('Inside the wardrobe you see a moth-eaten coat that was probably very fine in a previous life\n')
+    typewriter('Checking the shelves you notice tucked away on the bottom a bottle of wine\n')
+    typewriter('You attempt to read the label but it is in French and you were never good with languages\n')
+    typewriter('Never the less this is exactly what you need and take the bottle with you\n')
+    item = required[3]
+    inventory.append(item)
+    if 'Rusty Rapier' in inventory:
+        valid = no_sword_cabin()
+    else:
+        valid = cabin()
     return valid
 
 
@@ -359,9 +393,24 @@ def main():
 
             elif valid == 'desk':
                 if 'Ink' in inventory:
-                    print('You didn\'t see anything else useful on the desk\n')
+                    typewriter('You didn\'t see anything else useful on the desk\n')
                     if 'Rusty Rapier' in inventory:
+                        valid = no_sword_cabin()
+                    else:
                         valid = cabin()
+                else:
+                    valid = check_desk()
+
+            elif valid == 'wardrobe':
+                if 'Fine Wine' in inventory:
+                    typewriter('While that coat was very fancy in it\'s day it it too damaged to be worth wearing\n')
+                    typewriter('Aside from that there was nothing else of note in the wardrobe\n')
+                    if 'Rusty Rapier' in inventory:
+                        valid = no_sword_cabin()
+                    else:
+                        valid = cabin()
+                else:
+                    valid = check_wardrobe()
 
             elif valid == 'leave cabin':
                 valid = ship_deck()
