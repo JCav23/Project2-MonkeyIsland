@@ -186,6 +186,21 @@ def take_sword():
     return valid
 
 
+def descend_below_deck():
+    """
+    Exploration Event; the player moves below deck and given options
+    """
+    print(f"{Fore.YELLOW}{cannon}")
+    typewriter('You descend the stairs taking you below deck, a battery of cannons line either side\n')
+    typewriter('You cast your eyes around, you notice a door to the galley\n')
+    typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net\n')
+    typewriter('And the stairs leading back up above deck\n')
+    user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
+    valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
+                           'What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n')
+    return valid
+
+
 def main():
     valid = start_game()
     if valid == 'y':
