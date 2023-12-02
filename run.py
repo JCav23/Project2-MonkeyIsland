@@ -362,15 +362,16 @@ def check_pantry():
 
 def chef():
     """
-        Game Event; introduces the player to Chef character, plays game to win item
-        """
+    Game Event; introduces the player to Chef character, plays game to win item
+    """
     print(f"{Fore.YELLOW}{chef}")
+    chef_visited.append('YES')
     typewriter('The chef regards you with disdain "I\'ve found the key to the captain\'s cabin"\n')
     typewriter('"You should be more careful not to lose things, if you want it back you\'ll have to win it"\n')
     typewriter('He pull\'s out an old chalkboard and prepares a game of hangman for you\n')
     typewriter('Looks like you\'ll have to play his game if you want to get into the captain\'s cabin\n')
     valid = hangman()
-    if valid = 'win':
+    if valid == 'win':
         typewriter('The chef looks dejected... "Best two out of three?"\n')
         typewriter('You begin shouting a stream of profanities at the chef\n')
         typewriter('It is a long list of words that should never be uttered in civil society\n')
@@ -384,12 +385,33 @@ def chef():
         valid = galley()
     return valid
 
+
+def replay_chef():
+    print(f"{Fore.YELLOW}{chef}")
+    typewriter('"Ready to try again?" he says as he pulls out the chalkboard again')
+    valid = hangman()
+    if valid == 'win':
+        typewriter('The chef looks dejected... "Best two out of three?"\n')
+        typewriter('You begin shouting a stream of profanities at the chef\n')
+        typewriter('It is a long list of words that should never be uttered in civil society\n')
+        typewriter('The chef finally relents, and hands over the key "Okay, no need to shout, I was just having fun\n')
+        item = 'Cabin Key'
+        inventory.append(item)
+        valid = galley()
+    else:
+        typewriter('The chef roars with laughter at your failure\n')
+        typewriter('"You\'ll have to do better than that, come back if you ever want to try again"\n')
+        valid = galley()
+    return valid
+
+
 def main():
     """
     Main Game loop; while loop and control flow monitors game progress evaluated by player input and inventory
     """
     inventory.clear()
     galley_visited.clear()
+    chef_visited.clear()
     valid = start_game()
     if valid == 'y':
         valid = start_adventure()
@@ -459,6 +481,16 @@ def main():
                     valid = galley()
                 else:
                     valid = check_pantry()
+
+            elif valid == 'chef':
+                if 'Cabin Key' in inventory:
+                    typewriter('You already have the key from the Chef and you are in no mood for another game\n')
+                    valid = galley()
+                else:
+                    if chef_visited:
+                        pass
+                    else:
+                        valid = chef()
 
             elif valid == 'barrels':
                 valid = powder_barrels()
