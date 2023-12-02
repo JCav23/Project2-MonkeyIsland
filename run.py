@@ -145,6 +145,9 @@ def cabin_door():
 
 
 def captains_cabin():
+    """
+    Exploration event; player has the choice to explore the room looking for items
+    """
     print(f"{Fore.YELLOW}{sword}")
     typewriter('You stroll through the door and into a cabin fit for a king...\n')
     typewriter('Well fit for a captain...\n')
@@ -157,14 +160,30 @@ def captains_cabin():
     return valid
 
 
+def cabin():
+    """
+    Exploration event; triggers if the player is in the cabin but already has the sword in inventory
+    """
+    typewriter('You look around the captain\'s cabin, you see a dusty old desk next to the window\n')
+    typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
+    user_state = input('What would you like to do? : DESK/WARDROBE/LEAVE\n').lower()
+    valid = validate_input(user_state, ['desk', 'wardrobe', 'leave'],
+                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n')
+    return valid
+
+
 def take_sword():
+    """
+    Game event; gives the player the Rusty Rapier item
+    """
     typewriter('Technically, you are the captain of this ship now so that sword should belong to you\n')
     typewriter('So this can\'t be considered stealing right?\n')
     typewriter('Probably best to not think too hard about it\n')
     typewriter('You take the sword down off the wall and take it with you\n')
     item = 'Rusty Rapier'
     inventory.append(item)
-    return inventory
+    valid = cabin()
+    return valid
 
 
 def main():
