@@ -33,4 +33,5 @@ Happy coding!
 # Acknowledgements
 https://stackoverflow.com/questions/20302331/typing-effect-in-python
 https://www.asciiart.eu/
+https://asciiart.cc/
 https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20

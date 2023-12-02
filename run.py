@@ -31,11 +31,15 @@ def validate_input(actual, accepted, decision):
         elif choice == 'inventory':
             if inventory:
                 typewriter("You check your pockets and find...\n")
-                print(f"{Fore.GREEN}{inventory}")
+                print(f"{Fore.CYAN}{inventory}")
                 choice = input(f"{decision}")
             else:
                 typewriter("Your pockets are empty...\n")
                 choice = input(f"{decision}")
+        elif choice == 'required':
+            typewriter('You wrack your brain to remember the ingredients required to brew the magic potion\n')
+            typewriter('You remember that you need to find...')
+            print(f"{Fore.GREEN}{required}")
         else:
             print(f"Invalid input: Input must be one of the following inputs: {accepted}")
             choice = input(f"{decision}")
@@ -90,7 +94,7 @@ def start_adventure():
     typewriter('Explore the ship and find:\n')
     print(f"{Fore.GREEN}{required}")
     typewriter('Items will be added to your inventory automatically as you find them\n')
-    typewriter('Use the "INVENTORY" command at any input to see what you have found so far\n')
+    typewriter('Use the "INVENTORY" or "REQUIRED" commands at any input to see what you have found/still need to find\n')
     typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin\n')
     typewriter('Or stairs leading below deck, the choice is yours...\n')
     user_state = input("Where would you like to go? : LADDER/DOOR/STAIRS\n").lower()
@@ -100,6 +104,9 @@ def start_adventure():
 
 
 def ship_deck():
+    """
+    Exploration event; the player is on the main deck of the ship and can choose where to explore
+    """
     print(f"{Fore.YELLOW}{pirate_ship}")
     typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin\n')
     typewriter('Or stairs leading below deck, the choice is yours...\n')
@@ -125,6 +132,33 @@ def crows_nest():
     return valid
 
 
+def cabin_door():
+    """
+    Game event; if player does not have key the door will be locked forcing more exploration
+    """
+    print(f"{Fore.RED}{key}")
+    typewriter('You approach the door as grand and as wooden as a door to the captain\'s quarters ought to be\n')
+    typewriter('You try the handle but the door does not budge, it must be locked\n')
+    typewriter('You will have to find the key\n')
+    valid = ship_deck()
+    return valid
+
+
+def captains_cabin():
+    print(f"{Fore.YELLOW}{sword}")
+    typewriter('You stroll through the door and into a cabin fit for a king...\n')
+    typewriter('Well fit for a captain...\n')
+    typewriter('Well fit enough for you anyway...\n')
+    typewriter('You see a rusty old rapier mounted on the wall above the bed, a dusty old desk next to the window\n')
+    typewriter('And a rickety wardrobe with one door barely still hanging by it\'s hinges')
+    user_state = input('What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n').lower()
+    valid = validate_input(user_state, ['sword', 'desk', 'wardrobe', 'leave'],
+                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n')
+    return valid
+
+def take_sword('')
+
+
 def main():
     valid = start_game()
     if valid == 'y':
@@ -141,7 +175,10 @@ def main():
             elif valid == 'stairs':
                 pass
             elif valid == 'door':
-                pass
+                if 'Cabin Key' in inventory:
+                    valid = captains_cabin()
+                else:
+                    valid = cabin_door()
     elif valid == 'n':
         valid = game_over()
         if valid == 'y':
