@@ -154,7 +154,7 @@ def captains_cabin():
     """
     Exploration event; triggers on first visit, player has the choice to explore the room looking for items
     """
-    print(f"{Fore.YELLOW}{sword}")
+    print(f"{Fore.YELLOW}{bed}")
     typewriter('You stroll through the door and into a cabin fit for a king...\n')
     typewriter('Well fit for a captain...\n')
     typewriter('Well fit enough for you anyway...\n')
@@ -170,6 +170,7 @@ def no_sword_cabin():
     """
     Exploration event; triggers if the player is in the cabin but already has the sword in inventory
     """
+    print(f"{Fore.YELLOW}{bed}")
     typewriter('You look around the captain\'s cabin, you see a dusty old desk next to the window\n')
     typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
     user_state = input('What would you like to do? : DESK/WARDROBE/LEAVE CABIN\n').lower()
@@ -182,6 +183,7 @@ def cabin():
     """
     Exploration event; triggers if the player is in the cabin without the sword
     """
+    print(f"{Fore.YELLOW}{bed}")
     typewriter('You look around the captain\'s cabin, You see a rusty old rapier mounted on the wall above the bed\n')
     typewriter('You also see a dusty old desk next to the window\n')
     typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
@@ -195,6 +197,7 @@ def take_sword():
     """
     Game event; gives the player the Rusty Rapier item
     """
+    print(f"{Fore.YELLOW}{sword}")
     typewriter('Technically, you are the captain of this ship now so that sword should belong to you\n')
     typewriter('So this can\'t be considered stealing right?\n')
     typewriter('Probably best to not think too hard about it\n')
@@ -458,6 +461,7 @@ def endgame():
     print(f"{Fore.GREEN}{winner}")
     typewriter('You have done it, you have reached Monkey Island\n')
     typewriter('You are able to defeat the Ghastly Ghost Pirate LeChuck and rescue Elaine\n')
+    typewriter('You really are the greatest pirate to have ever lived\n')
     valid = goodbye()
     return valid
 
@@ -470,9 +474,10 @@ def brew_potion():
     typewriter('After a painstaking search finding all of the items you needed\n')
     typewriter('You throw each of the items into the large pot bubbling on the stove\n')
     typewriter('After the last item lands with a splash in the pot, smoke begins to billow out\n')
-    print(f"{Fore.GREEN}{explosion}")
-    typewriter('With a almighty BANG there is an explosion and you are knocked unconscious\n')
+    print(f"{Fore.CYAN}{explosion}")
+    typewriter('With a almighty BANG there is a magical explosion and you are knocked unconscious\n')
     typewriter('When you awaken you realise you have arrived at Monkey Island\n')
+    typewriter('It\'s time to face LeChuck\n')
     valid = endgame()
     return valid
 
