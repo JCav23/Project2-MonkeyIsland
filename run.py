@@ -173,6 +173,7 @@ def cabin():
     return valid
 
 
+
 def take_sword():
     """
     Game event; gives the player the Rusty Rapier item
@@ -182,6 +183,20 @@ def take_sword():
     typewriter('Probably best to not think too hard about it\n')
     typewriter('You take the sword down off the wall and take it with you\n')
     item = 'Rusty Rapier'
+    inventory.append(item)
+    valid = cabin()
+    return valid
+
+
+def check_desk():
+    """
+    Game Event; gives the player the required ink item
+    """
+    print(f"{Fore.YELLOW}{inkwell}")
+    typewriter('You walk over to the writing desk, and examine the dusty papers scattered across it\n')
+    typewriter('Your eyes stop as you catch sight of an old inkwell and quill\n')
+    typewriter('You remove the quill and leave it on the desk, and put the inkwell in your pocket\n')
+    item = required[4]
     inventory.append(item)
     valid = cabin()
     return valid
@@ -342,6 +357,12 @@ def main():
                 else:
                     valid = cabin_door()
 
+            elif valid == 'desk':
+                if 'Ink' in inventory:
+                    print('You didn\'t see anything else useful on the desk\n')
+                    if 'Rusty Rapier' in inventory:
+                        valid = cabin()
+
             elif valid == 'leave cabin':
                 valid = ship_deck()
 
@@ -353,6 +374,14 @@ def main():
 
             elif valid == 'leave galley':
                 valid = below_deck()
+
+            elif valid == 'pantry':
+                if 'Cinnamon Stick' in inventory:
+                    typewriter('You didn\'t see anything else useful in there\n')
+                    typewriter('And you do not want to tangle with another rat\n')
+                    valid = galley()
+                else:
+                    valid = check_pantry()
 
             elif valid == 'barrels':
                 valid = powder_barrels()
