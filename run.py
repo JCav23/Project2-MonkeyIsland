@@ -150,13 +150,21 @@ def captains_cabin():
     typewriter('Well fit for a captain...\n')
     typewriter('Well fit enough for you anyway...\n')
     typewriter('You see a rusty old rapier mounted on the wall above the bed, a dusty old desk next to the window\n')
-    typewriter('And a rickety wardrobe with one door barely still hanging by it\'s hinges')
+    typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges')
     user_state = input('What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n').lower()
     valid = validate_input(user_state, ['sword', 'desk', 'wardrobe', 'leave'],
                            'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n')
     return valid
 
+
 def take_sword():
+    typewriter('Technically, you are the captain of this ship now so that sword should belong to you\n')
+    typewriter('So this can\'t be considered stealing right?\n')
+    typewriter('Probably best to not think too hard about it\n')
+    typewriter('You take the sword down off the wall and take it with you\n')
+    item = 'Rusty Rapier'
+    inventory.append(item)
+    return inventory
 
 
 def main():
