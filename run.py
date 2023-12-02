@@ -199,7 +199,7 @@ def descend_below_deck():
     else:
         typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
     typewriter('And the stairs leading back up above deck\n')
-    user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
+    user_state = input('What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n').lower()
     valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
                            'What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n')
     return valid
@@ -216,7 +216,7 @@ def below_deck():
     else:
         typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
     typewriter('And the stairs leading back up above deck\n')
-    user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
+    user_state = input('What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n').lower()
     valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
                            'What would you like to do? : GALLEY/BARRELS/UPSTAIRS/CANNON\n')
     return valid
@@ -267,8 +267,8 @@ def first_galley_visit():
     """
     print(f"{Fore.YELLOW}{cauldron}")
     galley_visited.append('YES')
-    typewriter('As you wander into the ship\'s galley you notice a curious, unpleasant smell')
-    typewriter('You sincerely hope that it\'s not the chef\'s cooking and are very glad that pirates are\'t')
+    typewriter('As you wander into the ship\'s galley you notice a curious, unpleasant smell\n')
+    typewriter('You sincerely hope that it\'s not the chef\'s cooking and are very glad that pirates are\'t\n')
     typewriter('Subjected to visits from the Health inspector as you would most definitely be slapped with a fine\n')
     typewriter('You see a large pot bubbling on the stove, this is where you will need to brew the potion\n')
     typewriter('Looking around the room you also see the Chef prepping for tonight\'s supper,\n')
@@ -293,6 +293,23 @@ def galley():
     return valid
 
 
+def check_pantry():
+    """
+    Game Event; Gives the player the Cinnamon Stick item
+    """
+    print(f"{Fore.YELLOW}{rat}")
+    typewriter('As you open the doors to the pantry, a rat scurries out of the cupboard and down your arm\n')
+    typewriter('It dashes out of the door as you let out a cowardly shriek\n')
+    typewriter('You hear the Chef chuckle to himself behind you\n')
+    typewriter('You look through the dusty shelves of the poorly stocked pantry\n')
+    typewriter('You see a few bottles of grog, some tins of spices and a single cinnamon stick\n')
+    typewriter('You grab the cinnamon stick and close the cupboard doors')
+    item = required[1]
+    inventory.append(item)
+    valid = galley()
+    return valid
+
+
 def main():
     """
     Main Game loop; while loop and control flow monitors game progress evaluated by player input and inventory
@@ -304,6 +321,7 @@ def main():
         valid = start_adventure()
         exploration = True
         while exploration:
+
             if valid == 'ladder':
                 if 'Jolly Roger Flag' in inventory:
                     typewriter('You are certain there was nothing more of use up there and besides...\n')
@@ -311,17 +329,34 @@ def main():
                     valid = ship_deck()
                 else:
                     valid = crows_nest()
+
             elif valid == 'stairs':
                 valid = descend_below_deck()
+
             elif valid == 'upstairs':
                 valid = ship_deck()
+
             elif valid == 'door':
                 if 'Cabin Key' in inventory:
                     valid = captains_cabin()
                 else:
                     valid = cabin_door()
+
+            elif valid == 'leave cabin':
+                valid = ship_deck()
+
+            elif valid == 'galley':
+                if galley_visited:
+                    valid = galley()
+                else:
+                    valid = first_galley_visit()
+
+            elif valid == 'leave galley':
+                valid = below_deck()
+
             elif valid == 'barrels':
                 valid = powder_barrels()
+
             elif valid == 'cannon':
                 exploration = False
                 valid = cannon_event()
