@@ -169,7 +169,7 @@ def no_sword_cabin():
     typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
     user_state = input('What would you like to do? : DESK/WARDROBE/LEAVE CABIN\n').lower()
     valid = validate_input(user_state, ['desk', 'wardrobe', 'leave cabin'],
-                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n')
+                           'What would you like to do? : DESK/WARDROBE/LEAVE CABIN\n')
     return valid
 
 
@@ -180,8 +180,8 @@ def cabin():
     typewriter('You look around the captain\'s cabin, You see a rusty old rapier mounted on the wall above the bed\n')
     typewriter('You also see a dusty old desk next to the window\n')
     typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
-    user_state = input('What would you like to do? : DESK/WARDROBE/LEAVE CABIN\n').lower()
-    valid = validate_input(user_state, ['desk', 'wardrobe', 'leave cabin'],
+    user_state = input('What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n').lower()
+    valid = validate_input(user_state, ['sword', 'desk', 'wardrobe', 'leave cabin'],
                            'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n')
     return valid
 
@@ -411,6 +411,9 @@ def main():
                         valid = cabin()
                 else:
                     valid = check_wardrobe()
+
+            elif valid == 'sword':
+                valid = take_sword()
 
             elif valid == 'leave cabin':
                 valid = ship_deck()
