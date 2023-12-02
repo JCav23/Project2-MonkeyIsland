@@ -156,7 +156,7 @@ def captains_cabin():
                            'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n')
     return valid
 
-def take_sword('')
+def take_sword():
 
 
 def main():

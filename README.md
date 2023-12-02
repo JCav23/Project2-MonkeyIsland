@@ -1,6 +1,14 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+![MonkeyIslandLogo](assets/images/Monkey_Island_Logo.png)
 
-Welcome USER_NAME,
+Welcome to this project which is a text based choose your own adventure game.
+Inspired by the Monkey Island Series of point and click adventure games developed by Lucasfilm Games. 
+Specifically this game puts you into an adventure directly inspired by events from the first entry 'The Secret of Monkey Island'.
+The player takes on the role of Guybrush Threepwood a young man who dreams of becoming a great pirate.
+During the adventure the player finds themselves on a ship sailing to Monkey Island and must solve puzzles to progress
+This project aims to mimic these events instructing the player to find the correct items to win the game.
+The items chosen are similar to those found within the original adventure as seen below in an image taken from the game.
+
+![ItemList](assets/images/directions.png)
 
 This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
 
