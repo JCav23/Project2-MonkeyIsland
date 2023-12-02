@@ -9,6 +9,7 @@ import time
 colorama.init(autoreset=True)
 
 inventory = []
+galley_visited = []
 required = ['Jolly Roger Flag', 'Cinnamon Stick', 'Gunpowder', 'Fine Wine', 'Ink']
 
 
@@ -265,9 +266,24 @@ def first_galley_visit():
     Exploration Event; Player enters the ship galley for the first time
     """
     print(f"{Fore.YELLOW}{cauldron}")
+    galley_visited.append('YES')
     typewriter('As you wander into the ship\'s galley you notice a curious, unpleasant smell')
     typewriter('You sincerely hope that it\'s not the chef\'s cooking and are very glad that pirates are\'t')
     typewriter('Subjected to visits from the Health inspector as you would most definitely be slapped with a fine\n')
+    typewriter('You see a large pot bubbling on the stove, this is where you will need to brew the potion\n')
+    typewriter('Looking around the room you also see the Chef prepping for tonight\'s supper,\n')
+    typewriter('and a cupboard marked "PANTRY"\n')
+    user_state = input('What would you like to do? : PANTRY/CHEF/CAULDRON/LEAVE GALLEY\n').lower()
+    valid = validate_input(user_state, ['pantry', 'chef', 'cauldron', 'leave galley'],
+                           'What would you like to do? : PANTRY/CHEF/CAULDRON/LEAVE GALLEY\n')
+    return valid
+
+
+def galley():
+    """
+    Exploration Event; Player enters the galley
+    """
+    print(f"{Fore.YELLOW}{cauldron}")
     typewriter('You see a large pot bubbling on the stove, this is where you will need to brew the potion\n')
     typewriter('Looking around the room you also see the Chef prepping for tonight\'s supper,\n')
     typewriter('and a cupboard marked "PANTRY"\n')
@@ -282,6 +298,7 @@ def main():
     Main Game loop; while loop and control flow monitors game progress evaluated by player input and inventory
     """
     inventory.clear()
+    galley_visited.clear()
     valid = start_game()
     if valid == 'y':
         valid = start_adventure()
