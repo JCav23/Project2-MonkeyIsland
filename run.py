@@ -31,7 +31,7 @@ def validate_input(actual, accepted, decision):
         elif choice == 'inventory':
             if inventory:
                 typewriter("You check your pockets and find...\n")
-                print(f"{Fore.GREEN}{required}")
+                print(f"{Fore.GREEN}{inventory}")
                 choice = input(f"{decision}")
             else:
                 typewriter("Your pockets are empty...\n")
@@ -98,6 +98,7 @@ def start_adventure():
                            "Where would you like to go? : LADDER/DOOR/STAIRS\n")
     return valid
 
+
 def ship_deck():
     print(f"{Fore.YELLOW}{pirate_ship}")
     typewriter('You are on the deck, before you is the ladder to the crow\'s nest, a door to the captain\'s cabin\n')
@@ -107,17 +108,19 @@ def ship_deck():
                            "Where would you like to go? : LADDER/DOOR/STAIRS\n")
     return valid
 
+
 def crows_nest():
     """
     Game event to give the player the Jolly Roger Flag
     """
     print(f"{Fore.YELLOW}{pirate_flag}")
     typewriter('You climb the ladder up to the crows nest\n')
-    typewriter('This is a lot higher than you thought it would be, maybe don\'t look down...')
+    typewriter('This is a lot higher than you thought it would be, maybe don\'t look down...\n')
     typewriter('After nearly losing your footing twice and what feels like an eternity of climbing...\n')
     typewriter('You finally reach the top and see the ship\'s Jolly Roger Flag flapping in the breeze\n')
     typewriter('You take down the flag and fold it up and take it with you as you climb back down\n')
-    inventory.append(required[0])
+    item = required[0]
+    inventory.append(item)
     valid = ship_deck()
     return valid
 
@@ -126,12 +129,19 @@ def main():
     valid = start_game()
     if valid == 'y':
         valid = start_adventure()
-        if valid == 'ladder':
-            valid = crows_nest()
-        elif valid == 'stairs':
-            pass
-        elif valid == 'door':
-            pass
+        exploration = True
+        while exploration:
+            if valid == 'ladder':
+                if 'Jolly Roger Flag' in inventory:
+                    typewriter('You are certain there was nothing more of use up there and besides...\n')
+                    typewriter('You do not fancy making that climb again\n')
+                    valid = ship_deck()
+                else:
+                    valid = crows_nest()
+            elif valid == 'stairs':
+                pass
+            elif valid == 'door':
+                pass
     elif valid == 'n':
         valid = game_over()
         if valid == 'y':
@@ -143,3 +153,4 @@ def main():
 
 
 main()
+
