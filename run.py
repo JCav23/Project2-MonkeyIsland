@@ -306,8 +306,8 @@ def powder_barrels():
     else:
         print(f"{Fore.RED}{barrel}")
         typewriter('You tug at the cargo net securing the barrels in place\n')
-        typewriter('The net however does not budge, and you are unable to get into the barrels')
-        typewriter('Perhaps you can find something to cut the net')
+        typewriter('The net however does not budge, and you are unable to get into the barrels\n')
+        typewriter('Perhaps you can find something to cut the net\n')
         valid = below_deck()
     return valid
 
@@ -354,7 +354,7 @@ def check_pantry():
     typewriter('You hear the Chef chuckle to himself behind you\n')
     typewriter('You look through the dusty shelves of the poorly stocked pantry\n')
     typewriter('You see a few bottles of grog, some tins of spices and a single cinnamon stick\n')
-    typewriter('You grab the cinnamon stick and close the cupboard doors')
+    typewriter('You grab the cinnamon stick and close the cupboard doors\n')
     item = required[1]
     inventory.append(item)
     valid = galley()
@@ -370,7 +370,6 @@ def hangman():
     word_list = ['pirate', 'cannon', 'monkey', 'captain', 'swashbuckler']
     random = randint(0, 4)
     word = word_list[random]
-    print(word)
     length = len(word)
     game_board = []
     lives = 5
@@ -408,7 +407,7 @@ def chef():
     """
     Game Event; introduces the player to Chef character, plays game to win item
     """
-    print(f"{Fore.YELLOW}{chef}")
+    print(f"{Fore.YELLOW}{cook}")
     chef_visited.append('YES')
     typewriter('The chef regards you with disdain "I\'ve found the key to the captain\'s cabin"\n')
     typewriter('"You should be more careful not to lose things, if you want it back you\'ll have to win it"\n')
@@ -431,8 +430,8 @@ def chef():
 
 
 def replay_chef():
-    print(f"{Fore.YELLOW}{chef}")
-    typewriter('"Ready to try again?" he says as he pulls out the chalkboard again')
+    print(f"{Fore.YELLOW}{cook}")
+    typewriter('"Ready to try again?" he says as he pulls out the chalkboard again\n')
     valid = hangman()
     if valid == 'win':
         typewriter('The chef looks dejected... "Best two out of three?"\n')
@@ -532,7 +531,7 @@ def main():
                     valid = galley()
                 else:
                     if chef_visited:
-                        pass
+                        valid = replay_chef()
                     else:
                         valid = chef()
 
@@ -556,5 +555,4 @@ def main():
         print("Unforeseen Error: Please Restart")
 
 
-# main()
-hangman()
+main()
