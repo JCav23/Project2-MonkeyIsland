@@ -191,9 +191,9 @@ def descend_below_deck():
     Exploration Event; the player moves below deck and given options
     """
     print(f"{Fore.YELLOW}{cannon}")
-    typewriter('You descend the stairs taking you below deck, a battery of cannons line either side\n')
-    typewriter('You cast your eyes around, you notice a door to the galley\n')
-    typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net\n')
+    typewriter('You descend the stairs taking you below deck, a battery of cannons line both walls\n')
+    typewriter('You cast your eyes around, you notice a door to the galley,\n')
+    typewriter('Some barrels marked "GUNPOWDER" lashed to the port bow with cargo net,\n')
     typewriter('And the stairs leading back up above deck\n')
     user_state = input('What would you like to do? : GALLEY/BARRELS/STAIRS/CANNON\n').lower()
     valid = validate_input(user_state, ['galley', 'barrels', 'upstairs', 'cannon'],
@@ -209,11 +209,12 @@ def cannon_event():
     typewriter('As you sail through the air suddenly you think this may not have been the best idea\n')
     typewriter('With a splash you land in open water, with no ship in sight and sharks beginning to circle\n')
     typewriter('That definitely wasn\'t a good idea you think to yourself as a shark pulls you beneath the water\n')
-    valid = 'n'
+    valid = game_over()
     return valid
 
 
 def main():
+    inventory.clear()
     valid = start_game()
     if valid == 'y':
         valid = start_adventure()
@@ -236,10 +237,14 @@ def main():
             elif valid == 'cannon':
                 exploration = False
                 valid = cannon_event()
+                if valid == 'y':
+                    main()
+                elif valid == 'n':
+                    goodbye()
     elif valid == 'n':
         valid = game_over()
         if valid == 'y':
-            valid = start_game()
+            main()
         elif valid == 'n':
             goodbye()
     else:
