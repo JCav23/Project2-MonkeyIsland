@@ -237,8 +237,36 @@ def cannon_event():
     return valid
 
 
+def powder_barrels():
+    """
+    Game Event; if player has acquired the sword they will obtain the Gunpowder
+    """
+    if 'Rusty Rapier' in inventory:
+        print(f"{Fore.YELLOW}{barrel}")
+        typewriter('You draw the Rusty Rapier and used it to cut away the cargo net\n')
+        typewriter('You can now get into the barrel\'s')
+        typewriter('You remove the lid and peer inside a barrel,\n')
+        typewriter('Sure enough it is filled to the brim with powder\n')
+        typewriter('You take a handful and put it in your pocket\n')
+        item = required[2]
+        inventory.append(item)
+        valid = below_deck()
+    else:
+        print(f"{Fore.RED}{barrel}")
+        typewriter('You tug at the cargo net securing the barrels in place\n')
+        typewriter('The net however does not budge, and you are unable to get into the barrels')
+        typewriter('Perhaps you can find something to cut the net')
+        valid = below_deck()
+    return valid
+
+
+def galley():
+    
 
 def main():
+    """
+    Main Game loop; while loop and control flow monitors game progress evaluated by player input and inventory
+    """
     inventory.clear()
     valid = start_game()
     if valid == 'y':
@@ -254,11 +282,15 @@ def main():
                     valid = crows_nest()
             elif valid == 'stairs':
                 valid = descend_below_deck()
+            elif valid == 'upstairs':
+                valid = ship_deck()
             elif valid == 'door':
                 if 'Cabin Key' in inventory:
                     valid = captains_cabin()
                 else:
                     valid = cabin_door()
+            elif valid == 'barrels':
+                valid = powder_barrels()
             elif valid == 'cannon':
                 exploration = False
                 valid = cannon_event()
