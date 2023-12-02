@@ -154,9 +154,9 @@ def captains_cabin():
     typewriter('Well fit enough for you anyway...\n')
     typewriter('You see a rusty old rapier mounted on the wall above the bed, a dusty old desk next to the window\n')
     typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges')
-    user_state = input('What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n').lower()
-    valid = validate_input(user_state, ['sword', 'desk', 'wardrobe', 'leave'],
-                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n')
+    user_state = input('What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n').lower()
+    valid = validate_input(user_state, ['sword', 'desk', 'wardrobe', 'leave cabin'],
+                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n')
     return valid
 
 
@@ -166,9 +166,9 @@ def cabin():
     """
     typewriter('You look around the captain\'s cabin, you see a dusty old desk next to the window\n')
     typewriter('And a rickety wardrobe with one door barely still attached, hanging by it\'s hinges\n')
-    user_state = input('What would you like to do? : DESK/WARDROBE/LEAVE\n').lower()
-    valid = validate_input(user_state, ['desk', 'wardrobe', 'leave'],
-                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE\n')
+    user_state = input('What would you like to do? : DESK/WARDROBE/LEAVE CABIN\n').lower()
+    valid = validate_input(user_state, ['desk', 'wardrobe', 'leave cabin'],
+                           'What would you like to do? : SWORD/DESK/WARDROBE/LEAVE CABIN\n')
     return valid
 
 
@@ -260,8 +260,22 @@ def powder_barrels():
     return valid
 
 
-def galley():
-    
+def first_galley_visit():
+    """
+    Exploration Event; Player enters the ship galley for the first time
+    """
+    print(f"{Fore.YELLOW}{cauldron}")
+    typewriter('As you wander into the ship\'s galley you notice a curious, unpleasant smell')
+    typewriter('You sincerely hope that it\'s not the chef\'s cooking and are very glad that pirates are\'t')
+    typewriter('Subjected to visits from the Health inspector as you would most definitely be slapped with a fine\n')
+    typewriter('You see a large pot bubbling on the stove, this is where you will need to brew the potion\n')
+    typewriter('Looking around the room you also see the Chef prepping for tonight\'s supper,\n')
+    typewriter('and a cupboard marked "PANTRY"\n')
+    user_state = input('What would you like to do? : PANTRY/CHEF/CAULDRON/LEAVE GALLEY\n').lower()
+    valid = validate_input(user_state, ['pantry', 'chef', 'cauldron', 'leave galley'],
+                           'What would you like to do? : PANTRY/CHEF/CAULDRON/LEAVE GALLEY\n')
+    return valid
+
 
 def main():
     """
