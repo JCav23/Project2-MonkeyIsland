@@ -55,6 +55,8 @@ The items chosen are similar to those found within the original adventure as see
 
 ## Technologies Used
 
+* [PyCharm Community Edition](https://www.jetbrains.com/edu-products/download/other-PCE.html) was used as my development environment
+
 ### Python Packages/Libraries
 * [Time](https://pypi.org/project/time/) - used for typewriter effect
 * [Colorama](https://pypi.org/project/colorama/) - added color effect
@@ -63,36 +65,27 @@ The items chosen are similar to those found within the original adventure as see
 ### Testing
 * The code was tested extensively in the terminal during production to ensure each method worked correctly
 * incorrect inputs were used to test the validation methods
-* The code was passed through a PEP 8 Validator and while there were almost no issues
+* The code was passed through a PEP 8 Validator and while there were almost no issues there were some failures on line length that were unavoidable due to game content(no more than 5)
+
+
 
 ### Credits/Resources
 * [Stack Overflow](https://stackoverflow.com/questions/20302331/typing-effect-in-python) helped with the code for the typewriter effect
 * [One](https://www.asciiart.eu/), [two](https://asciiart.cc/), [three](https://emojicombos.com/) sites were used for resourcing Ascii art
 * [Patorjk](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) was used to generate the Ascii Word Art
 * [PEP8](https://pep8ci.herokuapp.com/#) - PEP8 Validator
-##
-## Reminders
-
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
 
 ## Creating the Heroku app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+* Create a new app in Heroku.
+* Select "New" and "Create new app".
+* Name the new app and click "Create new app".
+* Click on the "Settings" tab at the top of the page.
+* Open the "Reveal Config Vars" section and input the following information - KEY: PORT, VALUE: 8000. Nothing else is needed here for this project
+* Under the Config Vars section in "Settings" select "BuildPack" and select Python and Nodejs, Make sure they are in this order.
+* In "Deployment Method" click on "GitHub" to connect them.
+* Select "connect".
+* Enable Automatic Deploys" or "Deploy Branch".
+* Heroku will now deploy the site.
+* NOTE: Heroku deployment procedure changed from the Heroku dashboard so subsequent depoloments were deployments via the terminal only. See here for steps.
 
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
