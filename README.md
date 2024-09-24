@@ -10,7 +10,7 @@ The items chosen are similar to those found within the original adventure as see
 
 ![ItemList](assets/images/directions.png)
 
-* The live site can be found [here](https://ci-project3-monkey-island-5350c8077644.herokuapp.com/)
+* The live site can be found [here](https://ci-monkey-island-27570ccd436c.herokuapp.com/)
 
 ## User Experience
 
